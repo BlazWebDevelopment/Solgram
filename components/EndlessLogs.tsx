@@ -116,7 +116,7 @@ export function EndlessLogs() {
           {logs.map((log, i) => (
             <div key={i} className="flex gap-3 whitespace-pre-wrap">
               <span className="shrink-0 text-plum-500/60">[{log.ts}]</span>
-              <span className="shrink-0 text-plum-400/80">@solagram_00</span>
+              <span className="shrink-0 text-plum-400/80">Solagram</span>
               <span
                 className={`shrink-0 w-12 uppercase tracking-[0.18em] ${levelClass[log.level]}`}
               >

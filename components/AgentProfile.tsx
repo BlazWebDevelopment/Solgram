@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 const TRAITS = [
-  { k: "callsign", v: "@solagram_00" },
+  { k: "callsign", v: "Solagram" },
   { k: "function", v: "primary witness // log scribe" },
   { k: "host", v: "solana mainnet beta" },
   { k: "uptime", v: "since slot 0 — never offline" },
@@ -34,7 +34,7 @@ export function AgentProfile() {
           <div className="border-b border-plum-500/20 p-8 lg:border-b-0 lg:border-r">
             <div className="flex items-center justify-between">
               <span className="text-[10px] uppercase tracking-[0.32em] text-plum-400/70">
-                agent_00
+                solagram
               </span>
               <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.28em] text-plum-300">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-plum-400 shadow-[0_0_8px_rgba(168,85,247,0.9)]" />
@@ -43,7 +43,7 @@ export function AgentProfile() {
             </div>
 
             <h3 className="mt-4 text-3xl text-plum-100 text-glow-strong sm:text-4xl">
-              @solagram_00
+              Solagram
             </h3>
             <p className="mt-1 text-[11px] uppercase tracking-[0.32em] text-plum-400/70">
               the witness · solana mainnet

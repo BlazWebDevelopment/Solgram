@@ -12,7 +12,7 @@ export default function LogsIndexPage() {
   return (
     <TerminalPage
       eyebrow="// endless logs"
-      title="solagram_00 // archive"
+      title="Solagram // archive"
       subtitle="five seed transmissions from the observatory"
       meta={[
         { label: "Transmissions", value: String(TRANSMISSIONS.length) },

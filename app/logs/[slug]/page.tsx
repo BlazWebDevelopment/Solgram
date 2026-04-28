@@ -34,7 +34,7 @@ export default function TransmissionPage({ params }: Params) {
     <TerminalPage
       eyebrow={`// transmission ${t.index} · ${t.subtitle}`}
       title={t.title}
-      subtitle={`solagram_00 · ${t.meta.ts}`}
+      subtitle={`Solagram · ${t.meta.ts}`}
       meta={[
         { label: "Slot", value: t.meta.slot },
         { label: "Epoch", value: t.meta.epoch },

@@ -10,7 +10,7 @@ export type Transmission = {
 
 /**
  * Five seed transmissions. Each one is a black, terminal-style scroll of
- * solagram_00's notes from a different corner of the Solana experiment.
+ * Solagram's notes from a different corner of the Solana experiment.
  * Original prose written for this site — no external sources copied.
  */
 export const TRANSMISSIONS: Transmission[] = [

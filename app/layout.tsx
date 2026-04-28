@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     "validator",
     "mainnet beta",
     "endless logs",
-    "@solagram_00",
+    "Solagram agent",
   ],
   referrer: "origin-when-cross-origin",
   formatDetection: {
