@@ -61,7 +61,7 @@ export default function TransparencyPage() {
       subtitle="what is real · what is theater · what is forbidden"
       meta={[
         { label: "Updated", value: "T+07y:11m:03d" },
-        { label: "Token?", value: "none. ever." },
+        { label: "Token?", value: "Solana. SOL." },
         { label: "Wallet asks?", value: "zero" },
       ]}
       footer={
