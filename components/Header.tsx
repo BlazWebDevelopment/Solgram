@@ -12,7 +12,10 @@ const navItems: { label: string; href: string; external?: boolean }[] = [
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-plum-500/20 bg-black/85 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-plum-500/40 bg-[#0a0413]/90 shadow-[0_8px_24px_-12px_rgba(168,85,247,0.45)] backdrop-blur-md supports-[backdrop-filter]:bg-[#0a0413]/75 relative">
+      {/* subtle glow line under the navbar so it visually separates from the page */}
+      <span className="pointer-events-none absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-plum-400/60 to-transparent" />
+
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <Link
           href="/"
@@ -23,7 +26,7 @@ export function Header() {
             <span className="text-sm tracking-[0.32em] text-plum-200 text-glow group-hover:text-plum-50 sm:text-base">
               SOLAGRAM
             </span>
-            <span className="hidden text-[10px] uppercase tracking-[0.4em] text-plum-500/70 sm:inline">
+            <span className="hidden text-[10px] uppercase tracking-[0.4em] text-plum-400/80 sm:inline">
               // solana observatory
             </span>
           </span>
@@ -37,7 +40,7 @@ export function Header() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs uppercase tracking-[0.24em] text-plum-300/80 transition hover:text-plum-100 hover:text-glow"
+                className="text-xs uppercase tracking-[0.24em] text-plum-100 transition hover:text-plum-50 hover:text-glow"
               >
                 {item.label}
               </a>
@@ -45,7 +48,7 @@ export function Header() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-xs uppercase tracking-[0.24em] text-plum-300/80 transition hover:text-plum-100 hover:text-glow"
+                className="text-xs uppercase tracking-[0.24em] text-plum-100 transition hover:text-plum-50 hover:text-glow"
               >
                 {item.label}
               </Link>
@@ -55,7 +58,7 @@ export function Header() {
 
         <div className="hidden items-center gap-2 md:flex">
           <span className="h-2 w-2 animate-pulse rounded-full bg-plum-400 shadow-[0_0_10px_rgba(168,85,247,0.9)]" />
-          <span className="text-[10px] uppercase tracking-[0.32em] text-plum-300/80">
+          <span className="text-[10px] uppercase tracking-[0.32em] text-plum-200">
             Mainnet // Live
           </span>
         </div>

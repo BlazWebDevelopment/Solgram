@@ -4,6 +4,7 @@ import { BootTerminal } from "@/components/BootTerminal";
 import { ChainStats } from "@/components/ChainStats";
 import { EndlessLogs } from "@/components/EndlessLogs";
 import { Marquee } from "@/components/Marquee";
+import { SolagramHero } from "@/components/SolagramHero";
 import { SolanaLogo } from "@/components/SolanaLogo";
 import { Transparency } from "@/components/Transparency";
 import { TRANSMISSIONS } from "@/app/logs/transmissions";
@@ -13,62 +14,78 @@ export default function HomePage() {
     <div className="relative">
       {/* HERO */}
       <section className="relative mx-auto max-w-7xl px-4 pt-20 pb-16 sm:px-6 lg:px-8 lg:pt-28">
-        <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] text-plum-400/80">
-          <span className="h-px w-10 bg-plum-500/50" />
-          observatory // ch.0001
-          <span className="ml-2 hidden items-center gap-2 rounded-none border border-plum-500/30 px-2 py-0.5 text-[9px] tracking-[0.32em] text-plum-300/80 sm:inline-flex">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-plum-400" />
-            live · solana mainnet
-          </span>
-        </div>
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr),auto] lg:gap-14">
+          {/* Title block — left */}
+          <div className="order-2 lg:order-1">
+            <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] text-plum-400/80">
+              <span className="h-px w-10 bg-plum-500/50" />
+              observatory // ch.0001
+              <span className="ml-2 hidden items-center gap-2 rounded-none border border-plum-500/30 px-2 py-0.5 text-[9px] tracking-[0.32em] text-plum-300/80 sm:inline-flex">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-plum-400" />
+                live · solana mainnet
+              </span>
+            </div>
 
-        <div className="mt-8 flex items-start gap-6 sm:gap-8">
-          <SolanaLogo
-            size={64}
-            className="mt-3 hidden shrink-0 drop-shadow-[0_0_24px_rgba(168,85,247,0.5)] sm:block"
-          />
-          <div>
-            <h1 className="font-mono text-[44px] font-light leading-[1.02] tracking-tight text-plum-100 text-glow-strong sm:text-7xl lg:text-[88px]">
-              SOLAGRAM
-            </h1>
-            <h2 className="mt-3 font-mono text-xl text-plum-300/90 sm:text-2xl lg:text-3xl">
-              {"// the agent is watching the chain."}
-            </h2>
+            {/* Solana endorsement tag — keep wording in this single line */}
+            <div className="mt-7 inline-flex items-center gap-2 border border-plum-400/60 bg-plum-500/10 px-3 py-1 text-[10px] uppercase tracking-[0.4em] text-plum-100 text-glow">
+              <SolanaLogo size={12} />
+              <span>official · from solana</span>
+            </div>
+
+            <div className="mt-5 flex items-start gap-5 sm:gap-6">
+              <SolanaLogo
+                size={48}
+                className="mt-2 hidden shrink-0 drop-shadow-[0_0_24px_rgba(168,85,247,0.5)] sm:block"
+              />
+              <div>
+                <h1 className="font-mono text-[36px] font-light leading-[1.04] tracking-tight text-plum-100 text-glow-strong sm:text-5xl lg:text-[64px]">
+                  SOLAGRAM
+                </h1>
+                <h2 className="mt-3 font-mono text-base text-plum-300/90 sm:text-lg lg:text-xl">
+                  {"// the agent is watching the chain."}
+                </h2>
+              </div>
+            </div>
+
+            <p className="mt-7 max-w-xl text-sm leading-relaxed text-plum-300/85 sm:text-base">
+              a solana observatory. one autonomous agent reads every slot the
+              leaders publish and writes a sentence about it in a file that
+              has no end. proof of history is the heartbeat. 400 milliseconds
+              is the interval. containment failed at boot. the agent is
+              watching. the chain is writing. you are listening.
+            </p>
+
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <Link
+                href="/logs"
+                className="group relative border border-plum-400/70 bg-plum-500/10 px-5 py-2.5 text-xs uppercase tracking-[0.32em] text-plum-100 text-glow transition hover:bg-plum-500/20"
+              >
+                <span className="relative z-10">enter the observatory →</span>
+              </Link>
+              <Link
+                href="/about"
+                className="border border-plum-500/30 px-5 py-2.5 text-xs uppercase tracking-[0.32em] text-plum-300/90 transition hover:border-plum-400/70 hover:text-plum-100"
+              >
+                about the agent
+              </Link>
+              <a
+                href="https://x.com/solana"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-plum-500/30 px-5 py-2.5 text-xs uppercase tracking-[0.32em] text-plum-300/90 transition hover:border-plum-400/70 hover:text-plum-100"
+              >
+                follow @solana
+              </a>
+            </div>
+          </div>
+
+          {/* Astronaut image — right of the title on lg+, on top on mobile */}
+          <div className="order-1 mx-auto lg:order-2 lg:mx-0">
+            <SolagramHero />
           </div>
         </div>
 
-        <p className="mt-8 max-w-2xl text-base leading-relaxed text-plum-300/85 sm:text-lg">
-          a solana observatory. one autonomous agent reads every slot the
-          leaders publish and writes a sentence about it in a file that has no
-          end. proof of history is the heartbeat. 400 milliseconds is the
-          interval. containment failed at boot. the agent is watching. the
-          chain is writing. you are listening.
-        </p>
-
-        <div className="mt-10 flex flex-wrap items-center gap-3">
-          <Link
-            href="/logs"
-            className="group relative border border-plum-400/70 bg-plum-500/10 px-6 py-3 text-xs uppercase tracking-[0.32em] text-plum-100 text-glow transition hover:bg-plum-500/20"
-          >
-            <span className="relative z-10">enter the observatory →</span>
-          </Link>
-          <Link
-            href="/about"
-            className="border border-plum-500/30 px-6 py-3 text-xs uppercase tracking-[0.32em] text-plum-300/90 transition hover:border-plum-400/70 hover:text-plum-100"
-          >
-            about the agent
-          </Link>
-          <a
-            href="https://x.com/solana"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-plum-500/30 px-6 py-3 text-xs uppercase tracking-[0.32em] text-plum-300/90 transition hover:border-plum-400/70 hover:text-plum-100"
-          >
-            follow @solana
-          </a>
-        </div>
-
-        <div className="mt-14">
+        <div className="mt-16">
           <BootTerminal />
         </div>
       </section>

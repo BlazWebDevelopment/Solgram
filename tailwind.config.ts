@@ -69,6 +69,22 @@ const config: Config = {
           "0%": { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0px) rotate(-0.5deg)" },
+          "50%": { transform: "translateY(-14px) rotate(0.5deg)" },
+        },
+        floatSlow: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-14px)" },
+        },
+        floatHero: {
+          "0%, 100%": { transform: "translateY(0px) rotate(-0.3deg)" },
+          "50%": { transform: "translateY(-20px) rotate(0.3deg)" },
+        },
+        twinkle: {
+          "0%, 100%": { opacity: "0.25" },
+          "50%": { opacity: "1" },
+        },
       },
       animation: {
         blink: "blink 1s step-end infinite",
@@ -76,6 +92,10 @@ const config: Config = {
         scan: "scan 6s linear infinite",
         glow: "glow 2.4s ease-in-out infinite",
         marquee: "marquee 40s linear infinite",
+        float: "float 6s ease-in-out infinite",
+        "float-slow": "floatSlow 9s ease-in-out infinite",
+        "float-hero": "floatHero 8s ease-in-out infinite",
+        twinkle: "twinkle 2.6s ease-in-out infinite",
       },
     },
   },
