@@ -2,41 +2,71 @@
 
 import { useEffect, useState } from "react";
 
-const INITIAL = {
-  slot: 341_022_817,
+const SLOTS_PER_EPOCH = 432_000;
+
+// Realistic-ish snapshot for Solana mainnet mid-2026. The starting slot
+// matches BootTerminal's ActiveStdoutBar so both live counters look aligned
+// on first paint.
+const INITIAL_STATE = {
+  slot: 487_412_900,
   tps: 3247,
-  epoch: 769,
   validators: 1483,
 };
 
-function fmt(n: number) {
+function fmt(n: number): string {
   return n.toLocaleString("en-US");
 }
 
+function fmt1(n: number): string {
+  return n.toLocaleString("en-US", {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
+}
+
 export function ChainStats() {
-  const [stats, setStats] = useState(INITIAL);
+  const [state, setState] = useState(INITIAL_STATE);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setStats((s) => ({
-        // slots advance ~every 400ms; we tick every 600ms so step a bit more than 1
-        slot: s.slot + 1 + Math.floor(Math.random() * 2),
-        tps: 2400 + Math.floor(Math.random() * 2400),
-        epoch:
-          s.slot % 432_000 === 0
-            ? s.epoch + 1
-            : s.epoch + (Math.random() < 0.001 ? 1 : 0),
-        validators: 1470 + Math.floor(Math.random() * 30),
-      }));
+      setState((s) => {
+        // Slot mostly +1, occasionally +2-3 to simulate skipped slots.
+        const r = Math.random();
+        const slotJump = r < 0.85 ? 1 : r < 0.97 ? 2 : 3;
+        const slot = s.slot + slotJump;
+
+        // TPS does a damped random walk inside a realistic mainnet band.
+        const tpsDelta = Math.round((Math.random() - 0.5) * 1400);
+        const tps = Math.max(1100, Math.min(5400, s.tps + tpsDelta));
+
+        // Validator count drifts slowly inside its real-world range.
+        const validatorsDelta = Math.round((Math.random() - 0.5) * 6);
+        const validators = Math.max(
+          1410,
+          Math.min(1720, s.validators + validatorsDelta),
+        );
+
+        return { slot, tps, validators };
+      });
     }, 600);
     return () => clearInterval(id);
   }, []);
 
+  // Derived: epoch and progress through it. Both come straight from the slot
+  // counter so they're always internally consistent.
+  const epoch = Math.floor(state.slot / SLOTS_PER_EPOCH);
+  const slotInEpoch = state.slot % SLOTS_PER_EPOCH;
+  const epochProgress = (slotInEpoch / SLOTS_PER_EPOCH) * 100;
+
   const items = [
-    { label: "Slot", value: fmt(stats.slot), suffix: "//live" },
-    { label: "TPS", value: fmt(stats.tps), suffix: "tx/s" },
-    { label: "Epoch", value: fmt(stats.epoch), suffix: null },
-    { label: "Validators", value: fmt(stats.validators), suffix: "online" },
+    { label: "Slot", value: fmt(state.slot), suffix: "//live" },
+    { label: "TPS", value: fmt(state.tps), suffix: "tx/s" },
+    {
+      label: "Epoch",
+      value: fmt(epoch),
+      suffix: `${fmt1(epochProgress)}% complete`,
+    },
+    { label: "Validators", value: fmt(state.validators), suffix: "online" },
   ];
 
   return (

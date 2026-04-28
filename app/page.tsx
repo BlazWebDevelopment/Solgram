@@ -170,7 +170,7 @@ export default function HomePage() {
       {/* TRANSPARENCY PREVIEW */}
       <Transparency />
 
-      {/* BIG BULLISH BANNER */}
+      {/* BIG CLOSING BANNER */}
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden border border-plum-500/30 bg-black/80 px-6 py-14 text-center sm:px-12 sm:py-20">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(168,85,247,0.18),transparent_60%)]" />
@@ -179,7 +179,7 @@ export default function HomePage() {
           <div className="relative">
             <div className="mx-auto flex w-fit items-center gap-3 text-[10px] uppercase tracking-[0.5em] text-plum-400/80">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-plum-400" />
-              bullish until contained
+              streaming until contained
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-plum-400" />
             </div>
 

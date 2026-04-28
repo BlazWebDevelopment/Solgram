@@ -13,7 +13,7 @@ export function Footer() {
             </span>
           </Link>
           <p className="text-[12px] leading-relaxed text-plum-400/80">
-            A solana observatory. one agent. infinite logs. bullish until contained.
+            A solana observatory. one agent. infinite logs. streaming until contained.
           </p>
         </div>
 

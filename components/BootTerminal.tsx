@@ -37,6 +37,18 @@ const STDOUT_EVENTS = [
   "leader schedule loaded",
 ];
 
+// Starting slot ≈ what Solana mainnet would be at mid-2026 if it kept up its
+// ~400ms cadence since launch (March 2020). Same constant used by ChainStats
+// so the two live counters look aligned on first paint.
+const INITIAL_SLOT = 487_412_900;
+
+// Always format with an explicit locale so SSR (whatever the build server's
+// OS locale is) and the browser produce the SAME string. Bare
+// `n.toLocaleString()` is what was causing the hydration mismatch.
+function fmtNumber(n: number): string {
+  return n.toLocaleString("en-US");
+}
+
 /**
  * Always-on log spam that lives between the terminal title row and the boot
  * sequence. Characters are appended one at a time into a fixed-size buffer;
@@ -48,7 +60,7 @@ const STDOUT_EVENTS = [
  * inside useEffect and only runs on the client.
  */
 function ActiveStdoutBar() {
-  const [slot, setSlot] = useState(341_022_817);
+  const [slot, setSlot] = useState(INITIAL_SLOT);
   const [buf, setBuf] = useState("agent_00 ready · listening to gossip · ");
 
   useEffect(() => {
@@ -59,8 +71,13 @@ function ActiveStdoutBar() {
 
     const id = setInterval(() => {
       tick += 1;
-      // slot counter ticks at roughly the chain's heartbeat (every ~10 chars)
-      if (tick % 10 === 0) setSlot((s) => s + 1);
+      // Slot counter ticks at roughly the chain's heartbeat (~every 450ms).
+      // Mostly +1, occasionally +2-3 to mimic skipped/dropped slots.
+      if (tick % 10 === 0) {
+        const r = Math.random();
+        const jump = r < 0.85 ? 1 : r < 0.97 ? 2 : 3;
+        setSlot((s) => s + jump);
+      }
 
       setBuf((prev) => {
         let next = prev;
@@ -91,7 +108,7 @@ function ActiveStdoutBar() {
         slot
       </span>
       <span className="shrink-0 font-mono tabular-nums text-plum-100 text-glow">
-        {slot.toLocaleString()}
+        {fmtNumber(slot)}
       </span>
       <span className="shrink-0 text-plum-500/40">·</span>
       <span className="shrink-0 text-plum-500/70">stdout&gt;</span>
