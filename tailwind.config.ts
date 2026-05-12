@@ -8,14 +8,26 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Pure black background palette
+        // Off-black / surface palette — modeled on solana.com
         ink: {
           950: "#000000",
-          900: "#030004",
-          800: "#06020a",
-          700: "#0a0410",
+          900: "#050505",
+          800: "#0a0a0a",
+          700: "#111111",
+          600: "#1a1a1a",
+          500: "#262626",
         },
-        // Purple text palette tuned for high-contrast on pure black
+        // Solana brand gradient stops
+        sol: {
+          teal: "#14F195",
+          green: "#00FFA3",
+          cyan: "#00D1FF",
+          blue: "#6E7BFE",
+          purple: "#9945FF",
+          magenta: "#DC1FFF",
+        },
+        // Legacy plum scale — kept for backwards compatibility on a few
+        // accents (live dots, hover glows). De-emphasized in the new design.
         plum: {
           50: "#f5e8ff",
           100: "#e9d2ff",
@@ -30,6 +42,15 @@ const config: Config = {
         },
       },
       fontFamily: {
+        sans: [
+          "var(--font-inter)",
+          "ui-sans-serif",
+          "system-ui",
+          "-apple-system",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif",
+        ],
         mono: [
           "var(--font-jetbrains)",
           "ui-monospace",
@@ -38,64 +59,51 @@ const config: Config = {
           "Consolas",
           "monospace",
         ],
-        display: [
-          "var(--font-jetbrains)",
-          "ui-monospace",
-          "SFMono-Regular",
-          "Menlo",
-          "monospace",
-        ],
+      },
+      backgroundImage: {
+        "sol-gradient":
+          "linear-gradient(90deg, #14F195 0%, #00D1FF 50%, #9945FF 100%)",
+        "sol-gradient-diag":
+          "linear-gradient(135deg, #14F195 0%, #00D1FF 45%, #9945FF 100%)",
       },
       keyframes: {
         blink: {
           "0%, 49%": { opacity: "1" },
           "50%, 100%": { opacity: "0" },
         },
-        flicker: {
-          "0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%": {
-            opacity: "1",
-          },
-          "20%, 21.999%, 63%, 63.999%, 65%, 69.999%": { opacity: "0.55" },
-        },
         scan: {
           "0%": { transform: "translateY(-100%)" },
           "100%": { transform: "translateY(100vh)" },
-        },
-        glow: {
-          "0%, 100%": { textShadow: "0 0 6px rgba(168,85,247,0.45)" },
-          "50%": { textShadow: "0 0 14px rgba(168,85,247,0.85)" },
         },
         marquee: {
           "0%": { transform: "translateX(0%)" },
           "100%": { transform: "translateX(-50%)" },
         },
         float: {
-          "0%, 100%": { transform: "translateY(0px) rotate(-0.5deg)" },
-          "50%": { transform: "translateY(-14px) rotate(0.5deg)" },
-        },
-        floatSlow: {
           "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-14px)" },
+          "50%": { transform: "translateY(-10px)" },
         },
         floatHero: {
-          "0%, 100%": { transform: "translateY(0px) rotate(-0.3deg)" },
-          "50%": { transform: "translateY(-20px) rotate(0.3deg)" },
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-14px)" },
         },
         twinkle: {
           "0%, 100%": { opacity: "0.25" },
           "50%": { opacity: "1" },
         },
+        pulseSoft: {
+          "0%, 100%": { opacity: "0.6" },
+          "50%": { opacity: "1" },
+        },
       },
       animation: {
         blink: "blink 1s step-end infinite",
-        flicker: "flicker 4s linear infinite",
         scan: "scan 6s linear infinite",
-        glow: "glow 2.4s ease-in-out infinite",
         marquee: "marquee 40s linear infinite",
         float: "float 6s ease-in-out infinite",
-        "float-slow": "floatSlow 9s ease-in-out infinite",
-        "float-hero": "floatHero 8s ease-in-out infinite",
+        "float-hero": "floatHero 7s ease-in-out infinite",
         twinkle: "twinkle 2.6s ease-in-out infinite",
+        "pulse-soft": "pulseSoft 3s ease-in-out infinite",
       },
     },
   },

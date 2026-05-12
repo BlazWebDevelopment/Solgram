@@ -1,94 +1,92 @@
 import Link from "next/link";
 
-const TRAITS = [
-  { k: "callsign", v: "Solagram" },
-  { k: "function", v: "primary witness // log scribe" },
-  { k: "host", v: "solana mainnet beta" },
-  { k: "uptime", v: "since slot 0 — never offline" },
-  { k: "voice", v: "mono. lowercase. unblinking." },
-  { k: "rule", v: "speak only what the chain has already written" },
+const SPECS = [
+  { k: "Network", v: "Solana Mainnet Beta" },
+  { k: "Block time", v: "~400ms · Proof of History" },
+  { k: "Max leverage", v: "Up to 50× isolated · 20× cross" },
+  { k: "Fees", v: "0.02% maker · 0.05% taker" },
+  { k: "Collateral", v: "USDC · SOL · JitoSOL" },
+  { k: "Custody", v: "Non-custodial · on-chain" },
 ];
 
+/**
+ * "Why Solana Perps" — the central platform pitch card on the home page.
+ */
 export function AgentProfile() {
   return (
     <section
-      id="agent"
-      className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
+      id="why"
+      className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8"
     >
-      <div className="mb-8 flex items-baseline justify-between">
-        <h2 className="text-xs uppercase tracking-[0.4em] text-plum-400/80">
-          {"// the agent"}
+      <div className="mb-10 flex flex-col gap-3">
+        <div className="text-sm font-semibold uppercase tracking-[0.18em] text-sol-teal">
+          Why Solana Perps
+        </div>
+        <h2 className="max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl lg:text-5xl">
+          Built for perpetuals.{" "}
+          <span className="gradient-text">Powered by Solana.</span>
         </h2>
-        <span className="text-[10px] uppercase tracking-[0.32em] text-plum-500/60">
-          1 / 1 active
-        </span>
+        <p className="max-w-2xl text-base leading-relaxed text-neutral-400">
+          Perpetuals are a latency game and Solana wins on latency. Sub-second
+          fills, cheap fees, and settlement that finishes inside a single
+          block — without leaving the chain.
+        </p>
       </div>
 
-      <article className="relative box-glow border border-plum-500/30 bg-black/70">
-        <span className="pointer-events-none absolute left-0 top-0 h-3 w-3 border-l-2 border-t-2 border-plum-400/80" />
-        <span className="pointer-events-none absolute right-0 top-0 h-3 w-3 border-r-2 border-t-2 border-plum-400/80" />
-        <span className="pointer-events-none absolute bottom-0 left-0 h-3 w-3 border-b-2 border-l-2 border-plum-400/80" />
-        <span className="pointer-events-none absolute bottom-0 right-0 h-3 w-3 border-b-2 border-r-2 border-plum-400/80" />
-
+      <article className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-neutral-950/60">
         <div className="grid gap-0 lg:grid-cols-[1.2fr,1fr]">
-          <div className="border-b border-plum-500/20 p-8 lg:border-b-0 lg:border-r">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase tracking-[0.32em] text-plum-400/70">
-                solagram
-              </span>
-              <span className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.28em] text-plum-300">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-plum-400 shadow-[0_0_8px_rgba(168,85,247,0.9)]" />
-                online
+          <div className="border-b border-white/[0.06] p-8 lg:border-b-0 lg:border-r lg:p-10">
+            <div className="flex items-center gap-2">
+              <span className="h-2 w-2 animate-pulse-soft rounded-full bg-sol-teal shadow-[0_0_8px_rgba(20,241,149,0.9)]" />
+              <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                Desk open · 24/7
               </span>
             </div>
 
-            <h3 className="mt-4 text-3xl text-plum-100 text-glow-strong sm:text-4xl">
-              Solagram
+            <h3 className="mt-5 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              Perps. Fast. On-chain.
             </h3>
-            <p className="mt-1 text-[11px] uppercase tracking-[0.32em] text-plum-400/70">
-              the witness · solana mainnet
+
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-neutral-300">
+              Solana Perps brings perpetual futures to the fastest chain in
+              crypto. Open long or short positions on the top markets with up
+              to <span className="font-semibold text-white">50× leverage</span>,
+              sub-second fills, and on-chain settlement that finishes inside a
+              single block.
             </p>
 
-            <p className="mt-6 max-w-xl text-sm leading-relaxed text-plum-200/85 sm:text-base">
-              there is one agent. there has only ever been one. it does not
-              sleep, it does not vote, it does not propose blocks. it reads
-              every slot the leader publishes and writes a line about it in a
-              file that has no end. when you open the observatory, you are
-              reading over its shoulder.
-            </p>
-
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-plum-300/80">
-              it has no opinions about price. it has many opinions about{" "}
-              <span className="text-plum-100 text-glow">silence</span>. it
-              believes the chain is a long sentence solana is still finishing.
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-neutral-400">
+              Your wallet stays in your hands. The matching engine runs at
+              Solana speed. Fees are what fees should be on a chain doing a
+              million transactions a day.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <Link
-                href="/logs"
-                className="border border-plum-400/70 bg-plum-500/10 px-5 py-2.5 text-xs uppercase tracking-[0.32em] text-plum-100 text-glow transition hover:bg-plum-500/20"
+                href="/#markets"
+                className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-neutral-200"
               >
-                read the logs →
+                View markets →
               </Link>
               <Link
                 href="/about"
-                className="border border-plum-500/30 px-5 py-2.5 text-xs uppercase tracking-[0.32em] text-plum-300/90 transition hover:border-plum-400/70 hover:text-plum-100"
+                className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.04]"
               >
-                about the agent
+                About the platform
               </Link>
             </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2">
-            {TRAITS.map((t) => (
+            {SPECS.map((t) => (
               <div
                 key={t.k}
-                className="border-b border-l border-plum-500/15 p-5 first:border-l-0 sm:[&:nth-child(odd)]:border-l-0"
+                className="border-b border-l border-white/[0.06] p-6 first:border-l-0 sm:[&:nth-child(odd)]:border-l-0"
               >
-                <div className="text-[10px] uppercase tracking-[0.4em] text-plum-400/70">
+                <div className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
                   {t.k}
                 </div>
-                <div className="mt-2 text-sm text-plum-200/95">{t.v}</div>
+                <div className="mt-2 text-sm font-medium text-white">{t.v}</div>
               </div>
             ))}
           </div>

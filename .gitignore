@@ -48,6 +48,4 @@ next-env.d.ts
 *.swp
 
 # logs
-# (note: do NOT use a bare `logs` pattern here — it would also ignore the
-# app/logs/ App Router route directory. `*.log` is enough.)
 *.log

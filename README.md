@@ -1,11 +1,11 @@
-# SOLAGRAM // Observatory
+# Solana Perps
 
-A black-and-purple, terminal-flavored landing site for **Solagram** — a Solana
-experiment with four autonomous agents stuck in an endless backrooms loop.
+A clean, modern landing site for **Solana Perps** — a perpetual-futures venue
+built on Solana. Dark theme, Solana brand gradient, Inter typography. Styled
+in the spirit of [solana.com](https://solana.com).
 
-Inspired in structure by `solbackrooms.xyz`, but rebuilt from scratch with a
-much darker palette: pure-black background, purple text/accents, monospaced
-typeface, CRT scanlines and a live streaming log feed.
+Trade SOL, BTC, ETH and more with up to 50× leverage, 400ms block time, deep
+liquidity and on-chain settlement. 24/7 markets, low fees, non-custodial.
 
 ## Stack
 
@@ -13,7 +13,7 @@ typeface, CRT scanlines and a live streaming log feed.
 - [React 18](https://react.dev/)
 - [TypeScript 5](https://www.typescriptlang.org/)
 - [Tailwind CSS 3](https://tailwindcss.com/)
-- [JetBrains Mono](https://www.jetbrains.com/lp/mono/) via `next/font`
+- [Inter](https://rsms.me/inter/) (primary) + [JetBrains Mono](https://www.jetbrains.com/lp/mono/) (data) via `next/font`
 
 ## Getting started
 
@@ -37,32 +37,45 @@ Then open http://localhost:3000.
 
 ```
 app/
-  globals.css        # Tailwind + CRT/scanline base styles
-  layout.tsx         # Root layout, fonts, metadata
-  page.tsx           # Composes the home page
+  globals.css        # Tailwind + Solana brand gradient helpers
+  layout.tsx         # Root layout, fonts (Inter + JetBrains Mono), metadata
+  page.tsx           # Home: hero, network pulse, markets, how-it-works, trades, FAQ
+  icon.png           # Favicon — the Solana Perps gradient "P"
+  about/             # /about — about Solana Perps
+  transparency/      # /transparency — full trading FAQ
+  images/            # Source brand assets (PerpsLogo.png)
 components/
-  Header.tsx         # Sticky top nav (About, Transparency, Endless Logs, X)
-  StatusBar.tsx      # IN ACTION • 4 AGENTS • CONTAINMENT FAILED
-  BootTerminal.tsx   # Animated typewriter boot sequence
-  Marquee.tsx        # Infinite scrolling tagline strip
-  AgentGrid.tsx      # The 4 agents
-  EndlessLogs.tsx    # Live-streaming `tail -f` of agent chatter
-  Transparency.tsx   # FAQ-style disclosure grid
-  Footer.tsx         # Footer with Twitter handle
-tailwind.config.ts   # Theme: ink (blacks), plum (purples), animations
+  Header.tsx         # Sticky top nav with brand lockup + Launch App CTA
+  Footer.tsx         # Platform / Markets / Solana columns
+  PerpsLogo.tsx      # Brand mark (gradient "P") sourced from /public/perps-logo.png
+  PerpsHero.tsx      # Hero visual — mini SOL-PERP candlestick + order book
+  ChainStats.tsx     # Live-ish Solana network pulse (slot, TPS, epoch, validators)
+  AgentProfile.tsx   # "Why Solana Perps" platform spec card
+  EndlessLogs.tsx    # Live trade tape (terminal `tail -f` style)
+  Transparency.tsx   # Home FAQ preview
+  TerminalPage.tsx   # Shared chrome for /about and /transparency
+public/
+  perps-logo.png     # The P-mark, used in components + as OG image
+tailwind.config.ts   # Theme: ink + Solana brand gradient + animations
 ```
 
 ## Theme
 
-The palette is intentionally extreme: `#000000` for the background and a
-purple ramp (`plum.100`–`plum.900`) for everything else. Tweak it in
-[`tailwind.config.ts`](./tailwind.config.ts).
+- **Background**: pure black (`#000`) with subtle teal + purple radial glows.
+- **Accents**: the Solana brand gradient (teal `#14F195` → cyan `#00D1FF` → purple `#9945FF`)
+  exposed as `bg-sol-gradient` and a `.gradient-text` utility.
+- **Type**: Inter for everything except tabular numbers / price displays
+  which use JetBrains Mono.
+
+Tweak in [`tailwind.config.ts`](./tailwind.config.ts) and
+[`app/globals.css`](./app/globals.css).
 
 ## Notes
 
-- The streaming log lines and agent quotes are flavor text — replace
-  `FRAGMENTS` in `components/EndlessLogs.tsx` with real on-chain data when
-  you wire up an RPC.
-- The `X / Twitter` link in the header / footer is currently a placeholder
-  (`https://x.com/`). Update it in `components/Header.tsx` and
-  `components/Footer.tsx` once the handle is live.
+- Prices, trades, and chain numbers shown on the site are illustrative
+  placeholders. Replace them with live data from your RPC / orderbook
+  program when wiring this up to mainnet.
+- All "Trade" buttons are visual stubs — they navigate to the `#markets`
+  section. Wire them up to your trading UI when ready.
+- The `@solana` link in the header / footer points at the official
+  `https://x.com/solana` account.

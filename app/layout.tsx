@@ -1,26 +1,30 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { StatusBar } from "@/components/StatusBar";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+});
 
 const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
-// Resolve once. Override at deploy time with NEXT_PUBLIC_SITE_URL=<your domain>
-// in your Vercel project settings so canonical / og:url get the real host.
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://solagram.xyz";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://solanaperps.xyz";
 
-const TITLE_DEFAULT = "Solagram // Solana Observatory";
+const TITLE_DEFAULT = "Solana Perps // Perpetual Futures on Solana";
 const DESCRIPTION =
-  "Solagram is a Solana observatory. One autonomous agent reads every slot the leaders publish and writes a sentence about it in a file that has no end. Proof of history is the heartbeat. 400 milliseconds is the interval. Containment failed at boot.";
+  "Solana Perps is a perpetual-futures venue built on Solana. Trade SOL, BTC, ETH and more with up to 50× leverage, 400ms block time, deep liquidity and on-chain settlement. 24/7 markets, low fees, non-custodial.";
 const SHORT_DESCRIPTION =
-  "A Solana observatory. One agent. Endless logs. Containment failed.";
+  "Perpetual futures on Solana. Up to 50× leverage. 400ms blocks. 24/7 markets.";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -37,35 +41,33 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: TITLE_DEFAULT,
-    template: "%s · Solagram",
+    template: "%s · Solana Perps",
   },
   description: DESCRIPTION,
-  applicationName: "Solagram",
+  applicationName: "Solana Perps",
   generator: "Next.js",
-  authors: [{ name: "Solagram" }],
-  creator: "Solagram",
-  publisher: "Solagram",
-  category: "technology",
+  authors: [{ name: "Solana Perps" }],
+  creator: "Solana Perps",
+  publisher: "Solana Perps",
+  category: "finance",
   keywords: [
     "Solana",
-    "Solagram",
-    "Solana observatory",
-    "Solana agent",
-    "Solana backrooms",
-    "blockchain",
-    "crypto",
-    "proof of history",
-    "validator",
+    "Solana Perps",
+    "Solana perpetuals",
+    "perpetual futures",
+    "perps trading",
+    "perpetuals exchange",
+    "DEX",
+    "on-chain perps",
+    "leverage trading",
+    "crypto futures",
+    "SOL perp",
+    "BTC perp",
+    "ETH perp",
     "mainnet beta",
-    "endless logs",
-    "Solagram agent",
   ],
   referrer: "origin-when-cross-origin",
-  formatDetection: {
-    telephone: false,
-    email: false,
-    address: false,
-  },
+  formatDetection: { telephone: false, email: false, address: false },
   robots: {
     index: true,
     follow: true,
@@ -78,49 +80,34 @@ export const metadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  alternates: {
-    canonical: "/",
-  },
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    siteName: "Solagram",
+    siteName: "Solana Perps",
     title: TITLE_DEFAULT,
     description: SHORT_DESCRIPTION,
     url: "/",
     locale: "en_US",
     images: [
       {
-        url: "/solagram-astronaut.png",
-        width: 1536,
+        url: "/perps-logo.png",
+        width: 1024,
         height: 1024,
-        alt: "Solagram — Solana observatory astronaut hologram",
+        alt: "Solana Perps",
         type: "image/png",
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     site: "@solana",
     creator: "@solana",
     title: TITLE_DEFAULT,
     description: SHORT_DESCRIPTION,
-    images: [
-      {
-        url: "/solagram-astronaut.png",
-        alt: "Solagram — Solana observatory astronaut hologram",
-      },
-    ],
-  },
-  icons: {
-    icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
-    ],
-    shortcut: ["/icon.svg"],
-    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
+    images: [{ url: "/perps-logo.png", alt: "Solana Perps" }],
   },
   other: {
     "msapplication-TileColor": "#000000",
-    "msapplication-TileImage": "/icon.svg",
   },
 };
 
@@ -130,10 +117,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={jetbrains.variable}>
-      <body className="font-mono antialiased text-plum-200 selection:bg-plum-500/40">
+    <html lang="en" className={`${inter.variable} ${jetbrains.variable}`}>
+      <body className="font-sans antialiased text-neutral-200 selection:bg-sol-purple/40">
         <Header />
-        <StatusBar />
         <main>{children}</main>
         <Footer />
       </body>

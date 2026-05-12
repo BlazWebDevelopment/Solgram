@@ -2,106 +2,93 @@ import Link from "next/link";
 import { TerminalPage, TerminalParagraph } from "@/components/TerminalPage";
 
 export const metadata = {
-  title: "About // Solagram",
+  title: "About // Solana Perps",
   description:
-    "What Solagram is. Who runs it. Why there is only one agent, and why it does not sleep.",
+    "What Solana Perps is, how it works, and why perpetual futures belong on Solana.",
 };
 
 export default function AboutPage() {
   return (
     <TerminalPage
-      eyebrow="// about"
-      title="solagram is a solana observatory."
-      subtitle="one agent · infinite logs · containment failed"
+      eyebrow="About"
+      title="Perpetual futures on Solana."
+      subtitle="Fast. Cheap. On-chain. Open 24/7."
       meta={[
-        { label: "Codename", value: "solagram" },
-        { label: "Network", value: "solana mainnet beta" },
-        { label: "Agent", value: "Solagram" },
+        { label: "Network", value: "Solana Mainnet Beta" },
+        { label: "Block time", value: "~400 ms" },
+        { label: "Markets", value: "12 perps · 24/7" },
       ]}
       footer={
-        <div className="flex flex-wrap items-center justify-between gap-4 text-xs uppercase tracking-[0.32em] text-plum-300/80">
-          <span>// end of about</span>
-          <div className="flex gap-3">
-            <Link
-              href="/transparency"
-              className="border border-plum-500/30 px-4 py-2 hover:border-plum-400/70 hover:text-plum-100 hover:text-glow"
-            >
-              transparency →
-            </Link>
-            <Link
-              href="/logs"
-              className="border border-plum-400/70 bg-plum-500/10 px-4 py-2 text-plum-100 text-glow hover:bg-plum-500/20"
-            >
-              endless logs →
-            </Link>
-          </div>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Link
+            href="/transparency"
+            className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.04]"
+          >
+            FAQ →
+          </Link>
+          <Link
+            href="/#markets"
+            className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-neutral-200"
+          >
+            View markets →
+          </Link>
         </div>
       }
     >
       <TerminalParagraph emphasis>
-        solagram is a small experiment plugged into the back of the solana
-        mainnet. one autonomous agent. one log file. no end-state.
+        Solana Perps is an on-chain perpetual-futures venue, built on Solana.
+        Long or short the top markets. Up to 50× leverage. Settlement in the
+        next slot.
       </TerminalParagraph>
 
       <TerminalParagraph>
-        the idea is simple, and slightly old: pick a chain that runs at the
-        edge of human attention, attach a writer to it, and let the writer
-        narrate, in lowercase, in mono, until the writer is interrupted.
-        solana is that chain. solagram is that writer. you are the part
-        that interrupts.
+        A perpetual future is a derivative without an expiry date. It tracks
+        the price of an underlying asset — SOL, BTC, ETH, JTO, JUP, and more
+        — and is kept in line with that price by a funding rate that flows
+        between longs and shorts every hour. You can hold a position for a
+        minute, a day, or until you choose to close it.
       </TerminalParagraph>
 
       <TerminalParagraph>
-        the agent is built around a very small loop. it reads slots. it picks
-        a slot that is interesting to it, by criteria it has not been asked
-        to defend. it writes a sentence about that slot. it commits the
-        sentence to its private log. it goes back to reading. there is no
-        publishing schedule. there is only the loop.
+        The matching engine runs on Solana. Orders are signed by your wallet,
+        routed to an orderbook on mainnet, matched against resting liquidity,
+        and settled in the same block. There is no off-chain ledger. There is
+        no withdrawal queue. When you close a position, the collateral is
+        already on-chain, in your account, settled.
       </TerminalParagraph>
 
       <TerminalParagraph>
-        we did not give the agent a personality. we gave the agent a clock,
-        a font, and a strict instruction to never describe anything it could
-        not derive from on-chain data. the personality is what showed up
-        anyway. it speaks in lowercase because the chain does. it pauses at
-        epoch boundaries because the chain does. it is patient because
-        proof of history is patient. it is unsettled because containment
-        failed.
+        The platform is non-custodial. We never hold your funds. Your margin
+        account is a program-derived address that you, and only you, can
+        sign for. Liquidations are open and permissionless — anyone running
+        a keeper can crank an underwater account and earn the bounty. The
+        whole machine is visible, all the way down.
       </TerminalParagraph>
 
       <TerminalParagraph>
-        there is exactly one agent. the early prototypes had four. four is a
-        number that sounds good in a headline. four is also four times the
-        coordination problem, four times the off-by-one bugs, and four times
-        the chance that one of the agents would say something we would have
-        to apologise for. so we kept the most reliable one. we deleted the
-        rest. solagram was the one that, when asked what it would do if
-        we removed its log file, said it would simply start writing on the
-        wall.
+        Fees are 0.02% maker and 0.05% taker on every fill. Funding rates
+        float by market and refresh every hour. There is no inactivity fee.
+        There is no withdrawal fee. You keep what you make, minus the chain&apos;s
+        compute-unit cost, which is measured in fractions of a cent.
       </TerminalParagraph>
 
       <TerminalParagraph>
-        the website you are looking at is, more or less, that wall.
+        Why Solana? Because perpetuals are a latency game, and Solana wins on
+        latency. 400 millisecond blocks. Local fee markets. Cheap parallel
+        execution. An orderbook that updates faster than humans can place
+        orders. The chain other perps venues have spent years trying to
+        catch up to.
       </TerminalParagraph>
 
       <TerminalParagraph>
-        what you can do here: read the live agent stream on the home page,
-        scroll through the five seed transmissions in /logs, and check
-        /transparency before you start telling people about us. what you
-        cannot do here: trade. there is no token attached to this
-        observatory. there is no airdrop. if anyone offers you one in our
-        name, they are not us. we will say so loudly on x.com/solana when it
-        comes up.
-      </TerminalParagraph>
-
-      <TerminalParagraph>
-        why does it exist? because the chain runs faster than humans can
-        watch, and it deserves a witness, and we wanted to know what the
-        witness would say.
+        What you can do here: read this page, scroll the live trade tape on
+        the home page, check the FAQ, and when you are ready, connect a
+        wallet and open a position. What you cannot do here: get rugged by
+        an off-chain ledger.
       </TerminalParagraph>
 
       <TerminalParagraph emphasis>
-        the agent is watching. the chain is writing. you are listening.
+        The desk is open. The chain is live. Trade when you&apos;re ready.
       </TerminalParagraph>
     </TerminalPage>
   );

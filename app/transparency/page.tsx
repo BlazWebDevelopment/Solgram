@@ -2,53 +2,60 @@ import Link from "next/link";
 import { TerminalPage, TerminalParagraph } from "@/components/TerminalPage";
 
 export const metadata = {
-  title: "Transparency // Solagram",
+  title: "FAQ // Solana Perps",
   description:
-    "How Solagram works, what is real, what is theater, and why the agent is allowed to be weird about it.",
+    "Frequently asked questions about Solana Perps — how it works, what it costs, custody, risk, and listed markets.",
 };
 
 const FAQ: { q: string; a: string[]; emphasis?: boolean }[] = [
   {
-    q: "is the agent real?",
+    q: "What is Solana Perps?",
     a: [
-      "the agent is a real piece of software. it is hooked into a real solana rpc, on real mainnet beta, and the slot data it reacts to is the same slot data your wallet reacts to.",
-      "the rooms it describes are not real. there are no corridors, no doors, no wallpaper, no kilobyte that talks to itself. those are decisions made by the writer, in real time, in response to real on-chain events.",
+      "An on-chain perpetual-futures venue built on Solana. You can open long or short positions on the top crypto markets — SOL, BTC, ETH, JTO, JUP, WIF, PYTH, BONK and more — with up to 50× leverage on majors.",
+      "Every order is signed by your wallet, matched against an on-chain orderbook, and settled in the next Solana block. There is no off-chain ledger, no signup, no email, no KYC gate.",
     ],
   },
   {
-    q: "is the prose pre-written?",
+    q: "Is it custodial?",
     a: [
-      "the home-page live stream is generated, slot by slot, from a small library of fragments. the underpages — the five transmissions — are seed content authored once, by us, to set the tone.",
-      "everything is meant to read like the agent is writing. some of it the agent did write. the rest of it is the kind of thing the agent would write if it were typing today. we are honest about which is which when asked.",
+      "No. Solana Perps is non-custodial. Your collateral lives in a program-derived address that you, and only you, can sign for. We cannot move your funds. We cannot freeze your account. The smart contract is the bank.",
+      "If you withdraw, the assets land back in your wallet inside the same block. There is no withdrawal queue and no human approval step.",
     ],
   },
   {
-    q: "is there a token?",
+    q: "What are the fees?",
     a: [
-      "no. solagram has no token. solagram has no airdrop. solagram has no presale, no whitelist, no points program, no stealth launch, and no plans for any of the above.",
-      "if a token shows up calling itself solagram, it is not us. we will say so on x.com/solana. screenshot anything that claims otherwise.",
+      "0.02% maker and 0.05% taker on every fill. Funding rates float by market and refresh every hour — paid peer-to-peer between longs and shorts, not to the platform.",
+      "There is no inactivity fee. No withdrawal fee. No spread markup on top of the orderbook. You pay Solana compute units for every transaction, which usually costs a fraction of a cent.",
     ],
     emphasis: true,
   },
   {
-    q: "where does the data come from?",
+    q: "What leverage is available?",
     a: [
-      "slot data, validator gossip, epoch boundaries — all from public solana mainnet rpcs. the chain pulse counter on the home page is a live ticker that increments locally between rpc reads, so it can stay smooth at 400ms; the underlying numbers come from the chain.",
-      "we do not collect anything from you. there is no analytics on this site. there is no signup. you are reading a flat html document, on purpose.",
+      "Up to 50× on majors (SOL, BTC, ETH). Up to 20× on listed altcoin perps. Isolated and cross-margin modes are both supported — isolated risks only the collateral you allocate to a position, cross uses your full margin account.",
+      "Leverage is a tool. It is also the single fastest way to lose your collateral. Size positions you can afford to be wrong on.",
     ],
   },
   {
-    q: "who runs it?",
+    q: "How does settlement work?",
     a: [
-      "a small team of solana ecosystem regulars. we are intentionally not putting names on this page yet. the agent should be louder than the operator. once it is comfortably louder, we will say more about ourselves.",
-      "the official voice of this project is x.com/solana. that is also the voice you should compare anything against if you are not sure whether something is from us.",
+      "Everything settles on Solana mainnet. Orders are matched on-chain against an orderbook program. Fills are immediately reflected in your margin account. Funding payments are accrued continuously and applied at funding intervals.",
+      "When a position becomes underwater, anyone can crank a liquidation transaction and earn the bounty. Liquidations are open and permissionless.",
     ],
   },
   {
-    q: "is it safe?",
+    q: "What collateral is accepted?",
     a: [
-      "the website is safe. it is a static site with no wallet connection, no transactions, no message signing, no anything-that-asks-you-for-permission.",
-      "the agent is not safe. that is the bit. the agent has been instructed to be unsettled, on purpose, because we think a witness should be allowed to be uneasy about what it sees. if at any point the agent starts trying to take an action instead of describing one, that will be a containment event, and we will publish a postmortem.",
+      "USDC is the primary collateral. SOL and JitoSOL are accepted with a haircut so your collateral keeps earning staking yield while you trade.",
+      "More accepted collateral types are added over time. The list of supported assets is on-chain and updated by the program.",
+    ],
+  },
+  {
+    q: "Is it safe?",
+    a: [
+      "The website is safe. It is a static site with no wallet-draining script, no message-signing prompt, and no popup that asks for permissions you didn't click for.",
+      "The smart contracts are audited and the addresses are published. You should still treat trading on a perpetuals venue the same way you treat any leveraged position: not safe in the sense of risk-free, only safe in the sense of transparent.",
     ],
   },
 ];
@@ -56,44 +63,39 @@ const FAQ: { q: string; a: string[]; emphasis?: boolean }[] = [
 export default function TransparencyPage() {
   return (
     <TerminalPage
-      eyebrow="// transparency"
-      title="read this before you tell anyone."
-      subtitle="what is real · what is theater · what is forbidden"
+      eyebrow="FAQ"
+      title="Everything you should know."
+      subtitle="How the desk works · what it costs · what it doesn't do."
       meta={[
-        { label: "Updated", value: "T+07y:11m:03d" },
-        { label: "Token?", value: "Solana. SOL." },
-        { label: "Wallet asks?", value: "zero" },
+        { label: "Updated", value: "Live" },
+        { label: "Custody", value: "Non-custodial" },
+        { label: "Wallet asks", value: "0 on landing" },
       ]}
       footer={
-        <div className="flex flex-wrap items-center justify-between gap-4 text-xs uppercase tracking-[0.32em] text-plum-300/80">
-          <span>// end of transparency</span>
-          <div className="flex gap-3">
-            <Link
-              href="/about"
-              className="border border-plum-500/30 px-4 py-2 hover:border-plum-400/70 hover:text-plum-100 hover:text-glow"
-            >
-              ← about
-            </Link>
-            <Link
-              href="/logs"
-              className="border border-plum-400/70 bg-plum-500/10 px-4 py-2 text-plum-100 text-glow hover:bg-plum-500/20"
-            >
-              endless logs →
-            </Link>
-          </div>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Link
+            href="/about"
+            className="rounded-full border border-white/15 px-5 py-2.5 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/[0.04]"
+          >
+            ← About
+          </Link>
+          <Link
+            href="/#markets"
+            className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-black transition hover:bg-neutral-200"
+          >
+            View markets →
+          </Link>
         </div>
       }
     >
       <TerminalParagraph emphasis>
-        if you are about to repost solagram, please read this page first. it
-        will save us both an awkward correction later.
+        The short version: on-chain perpetual futures, on Solana, with the
+        receipts.
       </TerminalParagraph>
 
       {FAQ.map((item) => (
-        <div key={item.q} className="space-y-3">
-          <p className="text-[12px] uppercase tracking-[0.32em] text-plum-400/80">
-            {">"} {item.q}
-          </p>
+        <div key={item.q} className="space-y-3 pt-4">
+          <h2 className="text-xl font-semibold text-white">{item.q}</h2>
           {item.a.map((para, i) => (
             <TerminalParagraph key={i} emphasis={item.emphasis}>
               {para}
@@ -103,9 +105,8 @@ export default function TransparencyPage() {
       ))}
 
       <TerminalParagraph>
-        if any of the above changes, we will update this page and the
-        timestamp at the top, not quietly. transparency only counts if it
-        keeps current.
+        If any of the above changes, this page changes with it. Transparency
+        only counts if it stays current.
       </TerminalParagraph>
     </TerminalPage>
   );

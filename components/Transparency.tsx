@@ -3,54 +3,66 @@ import Link from "next/link";
 export function Transparency() {
   const items = [
     {
-      k: "what is this",
-      v: "Solagram is a solana observatory. one autonomous agent reads every slot solana publishes and writes a sentence about it. you watch.",
+      k: "What is Solana Perps?",
+      v: "An on-chain perpetual-futures venue built on Solana. Open long or short positions on the top crypto markets with up to 50× leverage, sub-second fills, and 24/7 settlement.",
     },
     {
-      k: "is it real",
-      v: "the agent is real. the slots are real. the rooms it describes are not. probably.",
+      k: "Is it custodial?",
+      v: "No. You trade from your own wallet. Collateral, positions and settlement all live on Solana mainnet. No off-chain ledger, no withdrawal queue.",
     },
     {
-      k: "does it stop",
-      v: "no. solana does not stop, the log file does not have an end. the cursor blinks until you close the tab.",
+      k: "What does it cost?",
+      v: "0.02% maker / 0.05% taker on every fill. Funding rates float by market and refresh every hour, paid peer-to-peer between longs and shorts.",
     },
     {
-      k: "is it safe",
-      v: "containment failed at boot. that is the feature, not the bug.",
+      k: "Why Solana?",
+      v: "400ms block time. Cheap fees. Global liquidity. Settlement that finishes inside a single block — the chain other perps venues are still trying to catch up to.",
     },
   ];
 
   return (
     <section
-      id="transparency"
-      className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8"
+      id="faq-preview"
+      className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8"
     >
-      <div className="mb-8 flex items-baseline justify-between">
-        <h2 className="text-xs uppercase tracking-[0.4em] text-plum-400/80">
-          {"// transparency"}
-        </h2>
+      <div className="mb-10 flex items-end justify-between gap-6">
+        <div className="flex flex-col gap-3">
+          <div className="text-sm font-semibold uppercase tracking-[0.18em] text-sol-teal">
+            FAQ
+          </div>
+          <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            Everything you should know.
+          </h2>
+        </div>
         <Link
           href="/transparency"
-          className="text-[10px] uppercase tracking-[0.32em] text-plum-300/90 hover:text-plum-100 hover:text-glow"
+          className="hidden text-sm font-medium text-neutral-300 transition hover:text-white sm:inline-block"
         >
-          read the full disclosure →
+          Read the full FAQ →
         </Link>
       </div>
 
-      <div className="grid gap-px bg-plum-500/20 sm:grid-cols-2">
+      <div className="grid gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.06] sm:grid-cols-2">
         {items.map((it) => (
           <div
             key={it.k}
-            className="bg-black p-6 transition hover:bg-plum-500/[0.04]"
+            className="bg-neutral-950/60 p-7 transition hover:bg-neutral-900/60"
           >
-            <div className="text-[10px] uppercase tracking-[0.4em] text-plum-400/70">
-              {it.k}
-            </div>
-            <p className="mt-3 text-sm leading-relaxed text-plum-200/90">
+            <div className="text-base font-semibold text-white">{it.k}</div>
+            <p className="mt-3 text-sm leading-relaxed text-neutral-400">
               {it.v}
             </p>
           </div>
         ))}
+      </div>
+
+      <div className="mt-6 sm:hidden">
+        <Link
+          href="/transparency"
+          className="text-sm font-medium text-neutral-300 transition hover:text-white"
+        >
+          Read the full FAQ →
+        </Link>
       </div>
     </section>
   );

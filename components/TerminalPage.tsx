@@ -10,9 +10,9 @@ type Props = {
 };
 
 /**
- * Shared "terminal page" chrome used by /about, /transparency, /logs, and the
- * individual /logs/[slug] transmissions. Pure black bg, plum text, mono font,
- * heavy left/right gutter so the body reads like a terminal scroll.
+ * Shared page chrome for /about and /transparency. Clean dark layout with
+ * a prominent gradient eyebrow, large headline, optional meta grid, and a
+ * relaxed prose column underneath.
  */
 export function TerminalPage({
   eyebrow,
@@ -23,30 +23,27 @@ export function TerminalPage({
   footer,
 }: Props) {
   return (
-    <article className="mx-auto max-w-4xl px-4 pb-24 pt-12 sm:px-6 lg:px-8 lg:pt-20">
-      <div className="flex items-center gap-3 text-[10px] uppercase tracking-[0.5em] text-plum-400/80">
-        <span className="h-px w-10 bg-plum-500/50" />
+    <article className="mx-auto max-w-4xl px-4 pb-24 pt-16 sm:px-6 lg:px-8 lg:pt-24">
+      <div className="text-sm font-semibold uppercase tracking-[0.18em] text-sol-teal">
         {eyebrow}
       </div>
 
-      <h1 className="mt-6 font-mono text-3xl font-light leading-[1.1] text-plum-100 text-glow-strong sm:text-4xl lg:text-5xl">
+      <h1 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-5xl lg:text-6xl">
         {title}
       </h1>
 
       {subtitle && (
-        <p className="mt-3 text-sm uppercase tracking-[0.32em] text-plum-400/80">
-          {subtitle}
-        </p>
+        <p className="mt-4 text-base text-neutral-400 sm:text-lg">{subtitle}</p>
       )}
 
       {meta && meta.length > 0 && (
-        <div className="mt-6 grid gap-px border border-plum-500/20 bg-plum-500/20 sm:grid-cols-3">
+        <div className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.06] sm:grid-cols-3">
           {meta.map((m) => (
-            <div key={m.label} className="bg-black px-4 py-3">
-              <div className="text-[10px] uppercase tracking-[0.4em] text-plum-400/60">
+            <div key={m.label} className="bg-neutral-950/60 px-5 py-4">
+              <div className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
                 {m.label}
               </div>
-              <div className="mt-1 font-mono text-sm text-plum-100 text-glow tabular-nums">
+              <div className="mt-1.5 font-mono text-sm font-medium tabular-nums text-white">
                 {m.value}
               </div>
             </div>
@@ -54,23 +51,17 @@ export function TerminalPage({
         </div>
       )}
 
-      <div className="my-8 border-t border-dashed border-plum-500/30" />
-
-      <div className="space-y-5 font-mono text-[14px] leading-[1.85] text-plum-200/90 sm:text-[15px]">
+      <div className="mt-10 space-y-5 text-base leading-[1.8] text-neutral-300 sm:text-[17px]">
         {children}
       </div>
 
       {footer && (
-        <div className="mt-16 border-t border-plum-500/20 pt-8">{footer}</div>
+        <div className="mt-16 border-t border-white/[0.06] pt-8">{footer}</div>
       )}
     </article>
   );
 }
 
-/**
- * A single paragraph in the terminal page. Renders a faint left margin tick
- * so the prose looks like log output instead of a regular blog post.
- */
 export function TerminalParagraph({
   children,
   emphasis,
@@ -79,13 +70,6 @@ export function TerminalParagraph({
   emphasis?: boolean;
 }) {
   return (
-    <p
-      className={`relative pl-5 ${
-        emphasis ? "text-plum-100 text-glow" : ""
-      }`}
-    >
-      <span className="pointer-events-none absolute left-0 top-2 h-px w-3 bg-plum-500/40" />
-      {children}
-    </p>
+    <p className={emphasis ? "text-white" : ""}>{children}</p>
   );
 }
